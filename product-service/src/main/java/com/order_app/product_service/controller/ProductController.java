@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/product")
 public class ProductController {
 
     private final ProductService productService;
+
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getAllProducts() {
+        return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<ProductDto> create(@RequestBody ProductDto productDto) {
@@ -28,4 +35,5 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProduct(@PathVariable String skuCode) {
         return new ResponseEntity<>(productService.getProduct(skuCode), HttpStatus.OK);
     }
+
 }
