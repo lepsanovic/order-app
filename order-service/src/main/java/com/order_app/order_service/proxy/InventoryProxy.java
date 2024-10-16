@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "inventory", url = "localhost:7100/api/inventory")
+//@FeignClient(name = "inventory", url = "localhost:7100/api/inventory")
+@FeignClient(name= "inventory")
 public interface InventoryProxy {
 
-    @GetMapping("/{skuCode}")
+    @GetMapping("api/inventory/{skuCode}")
     public ResponseEntity<InventoryDto> getProductQuantityInStock(@PathVariable String skuCode);
+
 }
